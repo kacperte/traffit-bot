@@ -2,15 +2,17 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import re
+import os
+from dotenv import load_dotenv
 
-DRIVER_PATH = r"C:\Users\kacpe\OneDrive\Pulpit\Python\Projekty\chromedriver.exe"
-LOGIN = "kacper.trzepiecinski@hsswork.pl"
-PASSWORD = "KAcper2016!"
+load_dotenv()
+LOGIN = os.environ.get("LOGIN")
+PASSWORD = os.environ.get("PASSWORD")
 
 
 class TraffitBot:
@@ -68,15 +70,14 @@ class TraffitBot:
 
             for project in recruitment_projects:
                 id_attribute = project.get_attribute("id")
-                project_id = re.search("\d{1,2,3}", id_attribute).group()
+                project_id = re.search("\d{2,3}", id_attribute).group()
                 projects_id.append(project_id)
 
         return projects_id
 
-    def get_info_about_project(self):
-        # Log to Traffit account
-        self.login_to_traffit()
-        self.driver.get("https://hsswork.traffit.com/#/recruitments/recruitment/280")
+    def get_info_about_project(self, id):
+        # Open recruitment project
+        self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{id}")
 
         # Locate details page button and click it
         try:
@@ -90,21 +91,29 @@ class TraffitBot:
         except NoSuchElementException:
             print("We can not located details page element. Try again.")
 
+        except TimeoutException:
+            print("Loading details page element took too much time!")
+
         # Locate project owner info
         try:
             owner = (
                 WebDriverWait(self.driver, 10)
                 .until(
                     EC.presence_of_element_located(
-                        (By.XPATH, "//div[@class='pad-top-8 ng-binding']")
+                        (
+                            By.XPATH,
+                            "//div[@class='recruitment-owner-item ng-binding ng-scope']",
+                        )
                     )
                 )
-                .text.split("-")[1]
-                .strip()
+                .text
             )
 
         except NoSuchElementException:
             print("We can not located project owner element. Try again.")
+
+        except TimeoutException:
+            print("Loading project owner element took too much time!")
 
         # Locate project info (project name and client)
         try:
@@ -121,6 +130,9 @@ class TraffitBot:
         except NoSuchElementException:
             print("We can not located project info element. Try again.")
 
+        except TimeoutException:
+            print("Loading project info element took too much time!")
+
         project_name, project_client = project_info[0], project_info[1]
 
         # Locate pipeline page button and click it
@@ -133,7 +145,12 @@ class TraffitBot:
             self.driver.execute_script("arguments[0].click();", pipeline)
 
         except NoSuchElementException:
-            print("We can not located details page element. Try again.")
+            print("We can not located pipeline page button. Try again.")
+
+        except TimeoutException:
+            print("Loading pipeline page button took too much time!")
+
+        self.driver.refresh()
 
         while True:
             new_stages = WebDriverWait(self.driver, 10).until(
@@ -199,29 +216,63 @@ class TraffitBot:
             break
 
         # Locate project stages kanbans
-        stages = WebDriverWait(self.driver, 10).until(
-            EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
-        )
+        try:
+            stages = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
+            )
 
-        # Left only "Nowy" and "Screen" stages
+        except NoSuchElementException:
+            print("We can not located project stages kanbans. Try again.")
+
+        except TimeoutException:
+            print("Loading project stages kanbans took too much time!")
+
+        # Left only "New" and "Screen" stages
         new_stages, screen_stages = stages[0], stages[1]
 
-        output = {}
+        output = {
+            "Project Owner": owner,
+            "Project": project_name,
+            "Client": project_client,
+            "Project ID": id,
+            "Candidate": dict(),
+        }
 
         for candidate, days in zip(
             new_stages.find_elements(By.CLASS_NAME, "sc-eZuRTN"),
             new_stages.find_elements(By.CLASS_NAME, "sc-bgXqIY"),
         ):
-            output[candidate.text] = days.text
+            if self.does_it_need_feedback(days.text):
+                output["Candidate"].update({candidate.text: days.text})
 
         for candidate, days in zip(
             screen_stages.find_elements(By.CLASS_NAME, "sc-eZuRTN"),
             screen_stages.find_elements(By.CLASS_NAME, "sc-bgXqIY"),
         ):
-            output[candidate.text] = days.text
+            if self.does_it_need_feedback(days.text):
+                output["Candidate"].update({candidate.text: days.text})
 
-        print(f"{owner}\n{project_name}\n{project_client}\n{output}")
+        return output
+
+    def get_info_about_all_active_project(self):
+        final_info = dict()
+        for id in self.get_id_of_all_actvie_project():
+            project_info = self.get_info_about_project(id)
+            if project_info["Candidate"]:
+                final_info[project_info["Project Owner"]] = project_info
+            self.driver.refresh()
+
+        return final_info
+
+    @staticmethod
+    def does_it_need_feedback(days):
+        if len(days.split()) == 1:
+            return False
+        if int(days.split()[0]) >= 5:
+            return True
+        else:
+            return False
 
 
 bot = TraffitBot(login=LOGIN, password=PASSWORD)
-print(bot.get_info_about_project())
+print(bot.get_info_about_all_active_project())
