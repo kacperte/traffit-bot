@@ -273,6 +273,3 @@ class TraffitBot:
         else:
             return False
 
-
-bot = TraffitBot(login=LOGIN, password=PASSWORD)
-print(bot.get_info_about_all_active_project())
