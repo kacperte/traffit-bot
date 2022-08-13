@@ -7,16 +7,17 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import re
-import os
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
+
 LOGIN = os.environ.get("LOGIN")
 PASSWORD = os.environ.get("PASSWORD")
 
 
 class TraffitBot:
-    def __init__(self, login: str, password: str):
+    def __init__(self, login: str = LOGIN, password: str = PASSWORD):
         self.login = login
         self.password = password
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
@@ -272,4 +273,3 @@ class TraffitBot:
             return True
         else:
             return False
-
