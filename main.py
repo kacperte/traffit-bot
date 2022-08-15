@@ -1,11 +1,8 @@
 from agents.traffit_bot import TraffitBot
-from mail_connector import MailAdapter
-from messages_parser import CandidateAlert
-from emial_preparer import EmailPreparer
-from dotenv import load_dotenv
+from mail_adapter.mail_connector import MailAdapter
+from mail_adapter.messages_parser import CandidateAlert
+from mail_adapter.emial_preparer import EmailPreparer
 from os import getenv
-
-load_dotenv()
 
 if __name__ == "__main__":
     info = TraffitBot().get_info_about_all_active_project()
