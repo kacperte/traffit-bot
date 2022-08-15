@@ -24,7 +24,7 @@ if __name__ == "__main__":
     mailer.send_mail(
         recipient_email="kacper.trzepiecinski@hsswork.pl",
         subject="Status kandydatów",
-        content=msg.render(name='Kacper', content=k_trzepiecinski_info),
+        content=msg.render(name="Kacper", content=k_trzepiecinski_info),
     )
 
     # Borowska
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     mailer.send_mail(
         recipient_email="ewelina.borowska@hsswork.pl",
         subject="Status kandydatów",
-        content=msg.render(name='Ewelina', content=e_borowska_info),
+        content=msg.render(name="Ewelina", content=e_borowska_info),
     )
 
     # Beta
@@ -40,13 +40,14 @@ if __name__ == "__main__":
     mailer.send_mail(
         recipient_email="ewelina.beta@hsswork.pl",
         subject="Status kandydatów",
-        content=msg.render(name='Ewelina', content=e_beta_info),
+        content=msg.render(name="Ewelina", content=e_beta_info),
     )
 
     # Rosik
-    p_rosik_info = prepared_info.ewelina_beta
+    p_rosik_info = prepared_info.patrycja_rosik
     mailer.send_mail(
         recipient_email="patrycja.rosik@hsswork.pl",
         subject="Status kandydatów",
-        content=msg.render(name='Patrycja', content=p_rosik_info),
+        content=msg.render(name="Patrycja", content=p_rosik_info),
     )
+

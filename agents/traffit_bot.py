@@ -4,12 +4,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import re
 from dotenv import load_dotenv
 import os
-import json
+
 
 load_dotenv()
 
@@ -21,7 +22,14 @@ class TraffitBot:
     def __init__(self, login: str = LOGIN, password: str = PASSWORD):
         self.login = login
         self.password = password
-        self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
+        options = Options()
+        options.add_argument("--headless")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--no-sandbox")
+        options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+        self.driver = webdriver.Chrome(
+            executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options
+        )
         self.action = webdriver.ActionChains(self.driver)
         self.BASE_URL = "https://hsswork.traffit.com/"
         self.ALL_PROJECT_URL = "https://hsswork.traffit.com/#/recruitments/all/1"
@@ -59,11 +67,19 @@ class TraffitBot:
             print("We can not located this element. Try again.")
 
         for i in pages_nav:
-            self.driver.find_element(
-                By.XPATH,
-                f'//*[@id="recruitments_all"]/div[2]/div[1]/div[2]/div/div/div/div[2]/div[2]/table/tbody['
-                f"11]/tr/td/div[2]/div/div[{i}] ",
-            ).click()
+            self.driver.execute_script(
+                "arguments[0].click();",
+                WebDriverWait(self.driver, 10).until(
+                    EC.element_to_be_clickable(
+                        (
+                            By.XPATH,
+                            f'//*[@id="recruitments_all"]/div[2]/div[1]/div[2]/div/div/div/div[2]/div[2]/table/tbody['
+                            f"11]/tr/td/div[2]/div/div[{i}]",
+                        )
+                    )
+                ),
+            )
+
             time.sleep(3)
             recruitment_projects = self.driver.find_elements(
                 By.XPATH,
