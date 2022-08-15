@@ -9,6 +9,7 @@ import time
 import re
 from dotenv import load_dotenv
 import os
+import json
 
 load_dotenv()
 
@@ -256,13 +257,12 @@ class TraffitBot:
         return output
 
     def get_info_about_all_active_project(self):
-        final_info = dict()
+        final_info = list()
         for id in self.get_id_of_all_actvie_project():
             project_info = self.get_info_about_project(id)
             if project_info["Candidate"]:
-                final_info[project_info["Project Owner"]] = project_info
+                final_info.append(project_info)
             self.driver.refresh()
-
         return final_info
 
     @staticmethod
