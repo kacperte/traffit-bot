@@ -47,6 +47,7 @@ class TraffitBot:
 
     def get_id_of_all_actvie_project(self):
         self.login_to_traffit()
+        print("SUCCESS - LOGGING")
         projects_id = []
         pages_nav = []
         try:
@@ -66,6 +67,7 @@ class TraffitBot:
         except NoSuchElementException:
             print("We can not located this element. Try again.")
 
+        print("SUCCESS - LOCATE PAG NAV ELEMENT")
         for i in pages_nav:
             self.driver.execute_script(
                 "arguments[0].click();",
