@@ -81,18 +81,19 @@ class TraffitBot:
                     )
                 ),
             )
-
+            print("SUCCESS - 3")
             time.sleep(3)
             recruitment_projects = self.driver.find_elements(
                 By.XPATH,
                 "//div[@class='actions__action datagrid-checkbox ng-scope']/input",
             )
-
+            print("SUCCESS - 4")
             for project in recruitment_projects:
+                print("SUCCESS - 5")
                 id_attribute = project.get_attribute("id")
                 project_id = re.search("\d{2,3}", id_attribute).group()
                 projects_id.append(project_id)
-
+        print("SUCCESS - 6")
         return projects_id
 
     def get_info_about_project(self, id):
