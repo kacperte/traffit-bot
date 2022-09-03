@@ -278,10 +278,14 @@ class TraffitBot:
     def get_info_about_all_active_project(self):
         final_info = list()
         for id in self.get_id_of_all_actvie_project():
+            print("SUCCESS - 7")
             project_info = self.get_info_about_project(id)
+            print("SUCCESS - 8")
             if project_info["Candidate"]:
+                print("SUCCESS - 9")
                 final_info.append(project_info)
             self.driver.refresh()
+            print("SUCCESS - 10")
         return final_info
 
     @staticmethod
