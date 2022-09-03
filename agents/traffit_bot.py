@@ -97,9 +97,10 @@ class TraffitBot:
         return projects_id
 
     def get_info_about_project(self, id):
+        print("SUCCESS - 8")
         # Open recruitment project
         self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{id}")
-
+        print("SUCCESS - 9")
         # Locate details page button and click it
         try:
             details = WebDriverWait(self.driver, 10).until(
@@ -114,7 +115,7 @@ class TraffitBot:
 
         except TimeoutException:
             print("Loading details page element took too much time!")
-
+        print("SUCCESS - 10")
         # Locate project owner info
         try:
             owner = (
@@ -135,7 +136,7 @@ class TraffitBot:
 
         except TimeoutException:
             print("Loading project owner element took too much time!")
-
+        print("SUCCESS - 11")
         # Locate project info (project name and client)
         try:
             project_info = (
@@ -153,7 +154,7 @@ class TraffitBot:
 
         except TimeoutException:
             print("Loading project info element took too much time!")
-
+        print("SUCCESS - 12")
         project_name, project_client = project_info[0], project_info[1]
 
         # Locate pipeline page button and click it
@@ -170,13 +171,14 @@ class TraffitBot:
 
         except TimeoutException:
             print("Loading pipeline page button took too much time!")
-
+        print("SUCCESS - 13")
         self.driver.refresh()
-
+        print("SUCCESS - 14")
         while True:
             new_stages = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
             )[0]
+            print("SUCCESS - 16")
             num_of_candidates_in_stages = new_stages.find_elements(
                 By.CLASS_NAME, "sc-eZuRTN"
             )
@@ -186,7 +188,7 @@ class TraffitBot:
                 "arguments[0].scrollIntoView();", num_of_candidates_in_stages[-1]
             )
             time.sleep(5)
-
+            print("SUCCESS - 17")
             if len(num_of_candidates_in_stages) != len(
                 WebDriverWait(self.driver, 10)
                 .until(
@@ -203,7 +205,7 @@ class TraffitBot:
                 time.sleep(5)
             else:
                 break
-
+        print("SUCCESS - 18")
         while True:
             screen_stages = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
@@ -280,12 +282,12 @@ class TraffitBot:
         for id in self.get_id_of_all_actvie_project():
             print("SUCCESS - 7")
             project_info = self.get_info_about_project(id)
-            print("SUCCESS - 8")
+
             if project_info["Candidate"]:
-                print("SUCCESS - 9")
+
                 final_info.append(project_info)
             self.driver.refresh()
-            print("SUCCESS - 10")
+
         return final_info
 
     @staticmethod
