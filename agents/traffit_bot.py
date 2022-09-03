@@ -175,6 +175,7 @@ class TraffitBot:
         self.driver.refresh()
         print("SUCCESS - 14")
         while True:
+            print("SUCCESS - 15")
             new_stages = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
             )[0]
