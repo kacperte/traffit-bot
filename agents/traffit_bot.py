@@ -47,7 +47,6 @@ class TraffitBot:
 
     def get_id_of_all_actvie_project(self):
         self.login_to_traffit()
-        print("SUCCESS - LOGGING")
         projects_id = []
         pages_nav = []
         try:
@@ -67,7 +66,6 @@ class TraffitBot:
         except NoSuchElementException:
             print("We can not located this element. Try again.")
 
-        print("SUCCESS - LOCATE PAG NAV ELEMENT")
         for i in pages_nav:
             self.driver.execute_script(
                 "arguments[0].click();",
@@ -81,26 +79,21 @@ class TraffitBot:
                     )
                 ),
             )
-            print("SUCCESS - 3")
             time.sleep(3)
             recruitment_projects = self.driver.find_elements(
                 By.XPATH,
                 "//div[@class='actions__action datagrid-checkbox ng-scope']/input",
             )
-            print("SUCCESS - 4")
             for project in recruitment_projects:
                 print("SUCCESS - 5")
                 id_attribute = project.get_attribute("id")
                 project_id = re.search("\d{2,3}", id_attribute).group()
                 projects_id.append(project_id)
-        print("SUCCESS - 6")
         return projects_id
 
     def get_info_about_project(self, id):
-        print("SUCCESS - 8")
         # Open recruitment project
         self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{id}")
-        print("SUCCESS - 9")
         # Locate details page button and click it
         try:
             details = WebDriverWait(self.driver, 10).until(
@@ -115,7 +108,6 @@ class TraffitBot:
 
         except TimeoutException:
             print("Loading details page element took too much time!")
-        print("SUCCESS - 10")
         # Locate project owner info
         try:
             owner = (
@@ -136,7 +128,6 @@ class TraffitBot:
 
         except TimeoutException:
             print("Loading project owner element took too much time!")
-        print("SUCCESS - 11")
         # Locate project info (project name and client)
         try:
             project_info = (
@@ -154,7 +145,6 @@ class TraffitBot:
 
         except TimeoutException:
             print("Loading project info element took too much time!")
-        print("SUCCESS - 12")
         project_name, project_client = project_info[0], project_info[1]
 
         # Locate pipeline page button and click it
@@ -171,15 +161,11 @@ class TraffitBot:
 
         except TimeoutException:
             print("Loading pipeline page button took too much time!")
-        print("SUCCESS - 13")
         self.driver.refresh()
-        print("SUCCESS - 14")
         while True:
-            print("SUCCESS - 15")
             new_stages = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
             )[0]
-            print("SUCCESS - 16")
             num_of_candidates_in_stages = new_stages.find_elements(
                 By.CLASS_NAME, "sc-eZuRTN"
             )
@@ -189,7 +175,6 @@ class TraffitBot:
                 "arguments[0].scrollIntoView();", num_of_candidates_in_stages[-1]
             )
             time.sleep(5)
-            print("SUCCESS - 17")
             if len(num_of_candidates_in_stages) != len(
                 WebDriverWait(self.driver, 10)
                 .until(
@@ -206,7 +191,6 @@ class TraffitBot:
                 time.sleep(5)
             else:
                 break
-        print("SUCCESS - 18")
         while True:
             screen_stages = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
@@ -268,14 +252,14 @@ class TraffitBot:
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
-
+        print(output)
         for candidate, days in zip(
             screen_stages.find_elements(By.CLASS_NAME, "sc-eZuRTN"),
             screen_stages.find_elements(By.CLASS_NAME, "sc-bgXqIY"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
-
+        print(output)
         return output
 
     def get_info_about_all_active_project(self):
