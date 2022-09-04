@@ -177,7 +177,7 @@ class TraffitBot:
         while True:
             print("SUCCESS - 15")
             new_stages = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
             )[0]
             print("SUCCESS - 16")
             num_of_candidates_in_stages = new_stages.find_elements(
@@ -193,7 +193,7 @@ class TraffitBot:
             if len(num_of_candidates_in_stages) != len(
                 WebDriverWait(self.driver, 10)
                 .until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
                 )[0]
                 .find_elements(By.CLASS_NAME, "sc-eZuRTN")
             ):
@@ -209,7 +209,7 @@ class TraffitBot:
         print("SUCCESS - 18")
         while True:
             screen_stages = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
             )[1]
             num_of_candidates_in_stages = screen_stages.find_elements(
                 By.CLASS_NAME, "sc-eZuRTN"
@@ -224,7 +224,7 @@ class TraffitBot:
             if len(num_of_candidates_in_stages) != len(
                 WebDriverWait(self.driver, 10)
                 .until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
                 )[0]
                 .find_elements(By.CLASS_NAME, "sc-eZuRTN")
             ):
@@ -242,7 +242,7 @@ class TraffitBot:
         # Locate project stages kanbans
         try:
             stages = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jONnzC"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
             )
 
         except NoSuchElementException:
