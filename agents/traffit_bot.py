@@ -3,9 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from webdriver_manager.chrome import ChromeDriverManager
 import time
 import re
 from dotenv import load_dotenv
@@ -167,7 +165,7 @@ class TraffitBot:
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
             )[0]
             num_of_candidates_in_stages = new_stages.find_elements(
-                By.CLASS_NAME, "sc-eZuRTN"
+                By.CLASS_NAME, "sc-jIAOiI"
             )
             if len(num_of_candidates_in_stages) <= 2:
                 break
@@ -180,10 +178,10 @@ class TraffitBot:
                 .until(
                     EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
                 )[0]
-                .find_elements(By.CLASS_NAME, "sc-eZuRTN")
+                .find_elements(By.CLASS_NAME, "sc-jIAOiI")
             ):
                 num_of_candidates_in_stages = new_stages.find_elements(
-                    By.CLASS_NAME, "sc-eZuRTN"
+                    By.CLASS_NAME, "sc-jIAOiI"
                 )
                 self.driver.execute_script(
                     "arguments[0].scrollIntoView();", num_of_candidates_in_stages[-1]
@@ -196,7 +194,7 @@ class TraffitBot:
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
             )[1]
             num_of_candidates_in_stages = screen_stages.find_elements(
-                By.CLASS_NAME, "sc-eZuRTN"
+                By.CLASS_NAME, "sc-jIAOiI"
             )
             if len(num_of_candidates_in_stages) <= 2:
                 break
@@ -210,10 +208,10 @@ class TraffitBot:
                 .until(
                     EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
                 )[0]
-                .find_elements(By.CLASS_NAME, "sc-eZuRTN")
+                .find_elements(By.CLASS_NAME, "sc-jIAOiI")
             ):
                 num_of_candidates_in_stages = screen_stages.find_elements(
-                    By.CLASS_NAME, "sc-eZuRTN"
+                    By.CLASS_NAME, "sc-jIAOiI"
                 )
                 self.driver.execute_script(
                     "arguments[0].scrollIntoView();", num_of_candidates_in_stages[-1]
@@ -247,15 +245,15 @@ class TraffitBot:
         }
 
         for candidate, days in zip(
-            new_stages.find_elements(By.CLASS_NAME, "sc-eZuRTN"),
-            new_stages.find_elements(By.CLASS_NAME, "sc-bgXqIY"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-eYPhOV"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
         print(output)
         for candidate, days in zip(
-            screen_stages.find_elements(By.CLASS_NAME, "sc-eZuRTN"),
-            screen_stages.find_elements(By.CLASS_NAME, "sc-bgXqIY"),
+            screen_stages.find_elements(By.CLASS_NAME, "sc-eYPhOV"),
+            screen_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
@@ -265,9 +263,7 @@ class TraffitBot:
     def get_info_about_all_active_project(self):
         final_info = list()
         for id in self.get_id_of_all_actvie_project():
-            print("SUCCESS - 7")
             project_info = self.get_info_about_project(id)
-
             if project_info["Candidate"]:
 
                 final_info.append(project_info)
