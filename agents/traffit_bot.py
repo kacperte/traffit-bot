@@ -87,6 +87,7 @@ class TraffitBot:
                 id_attribute = project.get_attribute("id")
                 project_id = re.search("\d{2,3}", id_attribute).group()
                 projects_id.append(project_id)
+            print(projects_id)
         return projects_id
 
     def get_info_about_project(self, id):
@@ -262,6 +263,7 @@ class TraffitBot:
 
     def get_info_about_all_active_project(self):
         final_info = list()
+        print("SUCCESS - 6")
         for id in self.get_id_of_all_actvie_project():
             project_info = self.get_info_about_project(id)
             if project_info["Candidate"]:
