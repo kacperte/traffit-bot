@@ -10,11 +10,12 @@
         {
           "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
         }
-      ]
-    },
+      ],
       "test": {
         "scripts": {
           "test": "python -m unittest tests.py"
         }
+      }
+  }
 }
-}
+
