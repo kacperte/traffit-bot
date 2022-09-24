@@ -245,8 +245,8 @@ class TraffitBot:
         }
 
         for candidate, days in zip(
-            new_stages.find_elements(By.CLASS_NAME, "sc-eYPhOV"),
             new_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-erPKsr"),
         ):
             print("////1days:", days.text, "candidate:", candidate.text)
             if self.does_it_need_feedback(days.text):
@@ -254,8 +254,8 @@ class TraffitBot:
         print(output)
 
         for candidate, days in zip(
-            screen_stages.find_elements(By.CLASS_NAME, "sc-eYPhOV"),
             screen_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
+            screen_stages.find_elements(By.CLASS_NAME, "sc-erPKsr"),
         ):
             print("///2days:", days.text, "candidate:", candidate.text)
             if self.does_it_need_feedback(days.text):
