@@ -1,18 +1,9 @@
 {
   "environments": {
-      "buildpacks": [
-        {
-          "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
-        },
-        {
-          "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
-        }
-      ],
-      "test": {
-        "scripts": {
-          "test": "python -m unittest tests.py"
-        }
+    "test": {
+      "scripts": {
+        "test": "python tests.py test"
       }
+    }
   }
 }
-
