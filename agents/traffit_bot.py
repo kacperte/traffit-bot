@@ -35,6 +35,7 @@ class TraffitBot:
         self.driver.find_element(By.ID, "password").send_keys("\n")
         time.sleep(2)
         self.driver.get(self.ALL_PROJECT_URL)
+        return "Success"
 
     def get_id_of_all_actvie_project(self):
         self.login_to_traffit()
