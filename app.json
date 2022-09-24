@@ -2,9 +2,6 @@
   "environments": {
       "buildpacks": [
         {
-          "url": "heroku/python"
-        },
-        {
           "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
         },
         {
