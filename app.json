@@ -1,9 +1,18 @@
 {
   "environments": {
-    "test": {
-      "scripts": {
-        "test": "python tests.py test"
-      }
-    }
-  }
+      "image": "heroku/python",
+      "buildpacks": [
+        {
+          "url": "https://github.com/heroku/heroku-buildpack-google-chrome"
+        },
+        {
+          "url": "https://github.com/heroku/heroku-buildpack-chromedriver"
+        }
+      ]
+    },
+      "test": {
+        "scripts": {
+          "test": "python tests.py test"
+        }
+}
 }
