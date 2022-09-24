@@ -12,7 +12,7 @@
     },
       "test": {
         "scripts": {
-          "test": "python tests.py test"
+          "test": "python -m unittest tests.py"
         }
 }
 }
