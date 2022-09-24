@@ -2,7 +2,6 @@ from agents.traffit_bot import TraffitBot
 from mail_adapter.mail_connector import MailAdapter
 from mail_adapter.messages_parser import CandidateAlert
 from mail_adapter.emial_preparer import EmailPreparer
-from os import getenv
 import os
 
 
@@ -17,8 +16,8 @@ if __name__ == "__main__":
     mailer = MailAdapter(
         host="poczta23110.e-kei.pl",
         port=465,
-        username=getenv("L_MAIL"),
-        password=getenv("P_MAIL"),
+        username=os.getenv("L_MAIL"),
+        password=os.getenv("P_MAIL"),
     )
 
     # Trzepiecinski
