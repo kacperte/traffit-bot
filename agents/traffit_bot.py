@@ -6,18 +6,11 @@ from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.options import Options
 import time
 import re
-from dotenv import load_dotenv
 import os
 
 
-load_dotenv()
-
-LOGIN = os.environ.get("LOGIN")
-PASSWORD = os.environ.get("PASSWORD")
-
-
 class TraffitBot:
-    def __init__(self, login: str = LOGIN, password: str = PASSWORD):
+    def __init__(self, login: str, password: str):
         self.login = login
         self.password = password
         options = Options()
@@ -36,9 +29,9 @@ class TraffitBot:
     def login_to_traffit(self):
         self.driver.get(self.BASE_URL)
         time.sleep(2)
-        self.driver.find_element(By.ID, "username").send_keys(LOGIN)
+        self.driver.find_element(By.ID, "username").send_keys(self.login)
         time.sleep(2)
-        self.driver.find_element(By.ID, "password").send_keys(PASSWORD)
+        self.driver.find_element(By.ID, "password").send_keys(self.password)
         self.driver.find_element(By.ID, "password").send_keys("\n")
         time.sleep(2)
         self.driver.get(self.ALL_PROJECT_URL)
@@ -248,19 +241,15 @@ class TraffitBot:
             new_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
             new_stages.find_elements(By.CLASS_NAME, "sc-erPKsr"),
         ):
-            print("////1days:", days.text, "candidate:", candidate.text)
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
-        print(output)
 
         for candidate, days in zip(
             screen_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
             screen_stages.find_elements(By.CLASS_NAME, "sc-erPKsr"),
         ):
-            print("///2days:", days.text, "candidate:", candidate.text)
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
-        print(output)
         return output
 
     def get_info_about_all_active_project(self):

@@ -9,7 +9,7 @@ class EmailPreparer:
     def __init__(self, data: list):
         self.data = data
 
-    def locate_candidates_to_recruiter(self):
+    def assign_candidates_to_recruiter(self):
         if not self.data:
             raise BaseException("Incorrect data was given - empty dataset.")
 

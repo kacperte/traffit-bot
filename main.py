@@ -3,11 +3,16 @@ from mail_adapter.mail_connector import MailAdapter
 from mail_adapter.messages_parser import CandidateAlert
 from mail_adapter.emial_preparer import EmailPreparer
 from os import getenv
+import os
+
 
 if __name__ == "__main__":
-    info = TraffitBot().get_info_about_all_active_project()
-    prepared_info = EmailPreparer(data=info).locate_candidates_to_recruiter()
+    info = TraffitBot(
+        login=os.environ.get("LOGIN"),
+        password=os.environ.get("PASSWORD")
+    ).get_info_about_all_active_project()
 
+    prepared_info = EmailPreparer(data=info).assign_candidates_to_recruiter()
     msg = CandidateAlert()
     mailer = MailAdapter(
         host="poczta23110.e-kei.pl",
