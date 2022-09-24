@@ -5,13 +5,15 @@ import os
 
 class TestTraffitBot(unittest.TestCase):
 
-    def setUp(self) -> None:
+    @classmethod
+    def setUpClass(cls) -> None:
         print(f'setting up class...{cls.__name__}')
-        self.bot = TraffitBot(login=os.environ.get("LOGIN"), password=os.environ.get("PASSWORD"))
+        cls.bot = TraffitBot(login=os.environ.get("LOGIN"), password=os.environ.get("PASSWORD"))
 
-    def tearDown(self) -> None:
+    @classmethod
+    def tearDownClass(cls) -> None:
         print(f'tearing down clas...{cls.__name__}')
-        del self.bot
+        del cls.bot
 
     def test_1_logging(self):
         self.assertEqual(self.bot.login, "Success")
