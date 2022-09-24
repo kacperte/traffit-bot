@@ -62,7 +62,7 @@ class TraffitBot:
                 .text.split(" ")
             )
         except NoSuchElementException:
-            print("We can not located this element. Try again.")
+            raise "We can not located this element. Try again."
 
         for i in pages_nav:
             self.driver.execute_script(
@@ -83,11 +83,9 @@ class TraffitBot:
                 "//div[@class='actions__action datagrid-checkbox ng-scope']/input",
             )
             for project in recruitment_projects:
-                print("SUCCESS - 5")
                 id_attribute = project.get_attribute("id")
                 project_id = re.search("\d{2,3}", id_attribute).group()
                 projects_id.append(project_id)
-            print(projects_id)
         return projects_id
 
     def get_info_about_project(self, id):
@@ -103,10 +101,10 @@ class TraffitBot:
             self.driver.execute_script("arguments[0].click();", details)
 
         except NoSuchElementException:
-            print("We can not located details page element. Try again.")
+            raise "We can not located details page element. Try again."
 
         except TimeoutException:
-            print("Loading details page element took too much time!")
+            raise "Loading details page element took too much time!"
         # Locate project owner info
         try:
             owner = (
@@ -123,10 +121,10 @@ class TraffitBot:
             )
 
         except NoSuchElementException:
-            print("We can not located project owner element. Try again.")
+            raise "We can not located project owner element. Try again."
 
         except TimeoutException:
-            print("Loading project owner element took too much time!")
+            raise "Loading project owner element took too much time!"
         # Locate project info (project name and client)
         try:
             project_info = (
@@ -140,10 +138,11 @@ class TraffitBot:
             )
 
         except NoSuchElementException:
-            print("We can not located project info element. Try again.")
+            raise "We can not located project info element. Try again."
 
         except TimeoutException:
-            print("Loading project info element took too much time!")
+            raise "Loading project info element took too much time!"
+
         project_name, project_client = project_info[0], project_info[1]
 
         # Locate pipeline page button and click it
@@ -156,10 +155,10 @@ class TraffitBot:
             self.driver.execute_script("arguments[0].click();", pipeline)
 
         except NoSuchElementException:
-            print("We can not located pipeline page button. Try again.")
+            raise "We can not located pipeline page button. Try again."
 
         except TimeoutException:
-            print("Loading pipeline page button took too much time!")
+            raise "Loading pipeline page button took too much time!"
         self.driver.refresh()
         while True:
             new_stages = WebDriverWait(self.driver, 10).until(
@@ -229,10 +228,10 @@ class TraffitBot:
             )
 
         except NoSuchElementException:
-            print("We can not located project stages kanbans. Try again.")
+            raise "We can not located project stages kanbans. Try again."
 
         except TimeoutException:
-            print("Loading project stages kanbans took too much time!")
+            raise "Loading project stages kanbans took too much time!"
 
         # Left only "New" and "Screen" stages
         new_stages, screen_stages = stages[0], stages[1]
@@ -249,13 +248,16 @@ class TraffitBot:
             new_stages.find_elements(By.CLASS_NAME, "sc-eYPhOV"),
             new_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
         ):
+            print("////1days:", days, "candidate:", candidate)
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
         print(output)
+
         for candidate, days in zip(
             screen_stages.find_elements(By.CLASS_NAME, "sc-eYPhOV"),
             screen_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
         ):
+            print("///2days:", days, "candidate:", candidate)
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
         print(output)
@@ -263,7 +265,6 @@ class TraffitBot:
 
     def get_info_about_all_active_project(self):
         final_info = list()
-        print("SUCCESS - 6")
         for id in self.get_id_of_all_actvie_project():
             project_info = self.get_info_about_project(id)
             if project_info["Candidate"]:
