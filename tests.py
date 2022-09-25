@@ -19,6 +19,8 @@ class TestTraffitBot(unittest.TestCase):
         self.assertEqual(self.bot.login, "Success")
 
 
+if __name__ == '__main__':
+    unittest.main()
 
 
 
