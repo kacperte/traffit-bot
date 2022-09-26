@@ -18,6 +18,9 @@ class TestTraffitBot(unittest.TestCase):
     def test_1_logging(self):
         self.assertEqual(self.bot.login_to_traffit(), "Success")
 
+    def test_2_get_id_of_all_actvie_project(self):
+        self.assertEqual(type(self.bot.get_id_of_all_actvie_project()), list)
+
 
 if __name__ == '__main__':
     unittest.main()
