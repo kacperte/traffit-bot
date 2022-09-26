@@ -20,7 +20,8 @@ class TestTraffitBot(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main()
+    result = unittest.main().result
+    print(result)
 
 
 
