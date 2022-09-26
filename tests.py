@@ -21,7 +21,8 @@ class TestTraffitBot(unittest.TestCase):
 
 if __name__ == '__main__':
     result = unittest.main().result
-    print(result)
+    if result == "OK":
+        print("ADASD")
 
 
 
