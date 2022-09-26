@@ -16,7 +16,7 @@ class TestTraffitBot(unittest.TestCase):
         del cls.bot
 
     def test_1_logging(self):
-        self.assertEqual(self.bot.login_to_traffit, "Success")
+        self.assertEqual(self.bot.login_to_traffit(), "Success")
 
 
 if __name__ == '__main__':
