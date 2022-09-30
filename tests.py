@@ -44,6 +44,7 @@ class TestTraffitBot(TraffitBot):
     def main(self):
         self.test_login_to_traffit()
         self.test_get_id_of_all_actvie_project()
+        self.test_kanbans_class_name()
 
 
 if __name__ == '__main__':
