@@ -39,7 +39,6 @@ class TraffitBot:
     def get_id_of_all_actvie_project(self):
         self.login_to_traffit()
         projects_id = []
-        pages_nav = []
         try:
             pages_nav = (
                 WebDriverWait(self.driver, 10)
