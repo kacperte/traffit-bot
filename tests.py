@@ -1,5 +1,8 @@
 from agents.traffit_bot import TraffitBot
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 import os
 
 
@@ -32,8 +35,12 @@ class TestTraffitBot(TraffitBot):
 
     def test_kanbans_class_name(self):
         try:
+            self.login_to_traffit()
             self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}")
-            elements = self.driver.find_element(By.CLASS_NAME, "sc-jOhDuK")
+
+            elements = WebDriverWait(self.driver, 10).until(
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
+            )
             if elements:
                 print("#Kanbas Class Name__Success__")
             else:
