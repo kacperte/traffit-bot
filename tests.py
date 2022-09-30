@@ -7,11 +7,12 @@ class TestTraffitBot(TraffitBot):
         super(TestTraffitBot, self).__init__(login, password)
         self.login = login
         self.password = password
+        print("__Start Testing__")
 
     def test_login_to_traffit(self):
         try:
             self.login_to_traffit()
-            self.driver.close()
+            self.driver.refresh()
             print("#Login__Success__")
         except Exception as e:
             print(f"{e} #Login__Error__")
