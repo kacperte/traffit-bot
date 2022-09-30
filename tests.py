@@ -12,7 +12,7 @@ class TestTraffitBot(TraffitBot):
     def test_login_to_traffit(self):
         try:
             self.login_to_traffit()
-            self.driver.refresh()
+            self.driver.delete_cookie()
             print("#Login__Success__")
         except Exception as e:
             print(f"{e} #Login__Error__")
