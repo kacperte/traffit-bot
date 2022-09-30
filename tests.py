@@ -8,15 +8,26 @@ class TestTraffitBot(TraffitBot):
         self.login = login
         self.password = password
 
-    def test_login(self):
+    def test_login_to_traffit(self):
         try:
             self.login_to_traffit()
-            print("#Login success")
+            print("#Login__Success__")
         except Exception as e:
-            print(f"{e} #Login error")
+            print(f"{e} #Login__Error__")
+
+    def test_get_id_of_all_actvie_project(self):
+        try:
+            output = self.get_id_of_all_actvie_project()
+            if type(output) == list and len(output) > 0:
+                print("#Get Id Of All Active Project__Success__")
+            else:
+                print("#Get Id Of All Active Project__Problem__")
+        except Exception as e:
+            print(f"{e} #Get Id Of All Active Project__Error__")
 
     def main(self):
-        self.test_login()
+        self.test_login_to_traffit()
+        self.test_get_id_of_all_actvie_project()
 
 
 if __name__ == '__main__':

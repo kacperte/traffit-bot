@@ -28,7 +28,6 @@ class TraffitBot:
 
     def login_to_traffit(self):
         self.driver.get(self.BASE_URL)
-        print('#1')
         time.sleep(2)
         self.driver.find_element(By.ID, "username").send_keys(self.login)
         time.sleep(2)
@@ -36,7 +35,6 @@ class TraffitBot:
         self.driver.find_element(By.ID, "password").send_keys("\n")
         time.sleep(2)
         self.driver.get(self.ALL_PROJECT_URL)
-
 
     def get_id_of_all_actvie_project(self):
         self.login_to_traffit()
