@@ -14,19 +14,18 @@ class TestTraffitBot(TraffitBot):
         self.random_project_id = None
         print("__Start Testing__")
 
-    def test_login_to_traffit(self):
+    def test_logging_to_traffit(self):
         try:
             self.login_to_traffit()
             self.driver.delete_all_cookies()
-            print("#Login__Success__")
+            print("#Logging To Traffit__Success__")
         except Exception as e:
-            print(f"{e} #Login__Error__")
+            print(f"{e} #Logging To Traffit__Error__")
 
     def test_get_id_of_all_actvie_project(self):
         try:
             output = self.get_id_of_all_actvie_project()
             self.random_project_id = output[0]
-            print(self.random_project_id)
             if type(output) == list and len(output) > 0:
                 self.driver.delete_all_cookies()
                 print("#Get Id Of All Active Project__Success__")
@@ -99,13 +98,26 @@ class TestTraffitBot(TraffitBot):
         except Exception as e:
             print(f"{e} #Candidate Days Name__Error__")
 
+    def test_entire_class(self):
+        try:
+            output = self.get_info_about_all_active_project()
+            if type(output) == list and len(output) > 0:
+                self.driver.delete_all_cookies()
+                print("#Entire Project__Success__")
+            else:
+                print("#Candidate Days Name__Problem__")
+        except Exception as e:
+            print(f"{e} #Candidate Days Name__Error__")
+
     def main(self):
-        self.test_login_to_traffit()
+        self.test_logging_to_traffit()
         self.test_get_id_of_all_actvie_project()
         self.test_kanbans_class_name()
         self.test_candidate_card_class_name()
         self.test_candidate_name_class_name()
         self.test_candidate_days_class_name()
+        self.test_entire_class()
+        print("__End Testing__")
 
 
 if __name__ == '__main__':
