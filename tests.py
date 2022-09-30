@@ -5,8 +5,8 @@ import os
 class TestTraffitBot(TraffitBot):
     def __init__(self, login, password):
         super(TestTraffitBot, self).__init__(login, password)
-        self.login = os.environ.get("LOGIN")
-        self.password = os.environ.get("PASSWORD")
+        self.login = login
+        self.password = password
 
     def test_login(self):
         try:
@@ -20,4 +20,7 @@ class TestTraffitBot(TraffitBot):
 
 
 if __name__ == '__main__':
-    TestTraffitBot.main()
+    TestTraffitBot(
+        login=os.environ.get("LOGIN"),
+        password=os.environ.get("PASSWORD")
+    ).main()
