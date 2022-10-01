@@ -144,7 +144,6 @@ if __name__ == '__main__':
         login=os.environ.get("LOGIN"),
         password=os.environ.get("PASSWORD")
     ).main()
-    print(output)
 
     msg = TestsAlert()
     mailer = MailAdapter(
