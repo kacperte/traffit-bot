@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Mail template</title>
-</head>
-<body>
-    <p>Cześć {{ name }},</p>
-    <p>Chciałem dać Ci znać, że ktoś czeka na kontakt z Twojej strony. Prosze skontaktuj się z poniższymi kandydatami:</p>
-    {% for project in content %}
-    <ul>
-        <li><strong>Klinet: </strong>{{project[0]}}</li>
-        <li><strong>Projekt: </strong>{{project[1]}}</li>
-        {% for candidate in project[2] %}
+    <head>
+        <meta charset="UTF-8">
+        <title>Mail template</title>
+    </head>
+    <body>
+        <p>Cześć {{ name }},</p>
+        <p>Chciałem dać Ci znać, że ktoś czeka na kontakt z Twojej strony. Prosze skontaktuj się z poniższymi kandydatami:</p>
+        {% for project in content %}
         <ul>
-            {% if candidate[0].split(" ")[0].endswith('a') %}
-            <li>Pani {{candidate[0]}} jest w etapie już {{candidate[1].split(" ")[0]}} dni</li>
-            {% else %}
-            <li>Pan {{candidate[0]}} jest w etapie już {{candidate[1].split(" ")[0]}} dni</li>
-            {% endif %}
+            <li><strong>Klinet: </strong>{{project[0]}}</li>
+            <li><strong>Projekt: </strong>{{project[1]}}</li>
+            {% for candidate in project[2] %}
+            <ul>
+                {% if candidate[0].split(" ")[0].endswith('a') %}
+                <li>Pani {{candidate[0]}} jest w etapie już {{candidate[1].split(" ")[0]}} dni</li>
+                {% else %}
+                <li>Pan {{candidate[0]}} jest w etapie już {{candidate[1].split(" ")[0]}} dni</li>
+                {% endif %}
+            </ul>
+            {% endfor %}
         </ul>
         {% endfor %}
-    </ul>
-    {% endfor %}
-    <p>Za tydzień wrócę z nowymi informacjami. Pozdrowienia od bota rekrutacyjnego!</p>
-</body>
+        <p>Za tydzień wrócę z nowymi informacjami. Pozdrowienia od bota rekrutacyjnego!</p>
+    </body>
 </html>

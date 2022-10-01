@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Mail template</title>
+    </head>
+    <body>
+        <p>Cześć {{ name }},</p>
+        <p>Poniżej wyniki testów przeprowadzonych w dniu {{ date }}:</p>
+        <ul>
+            <li>Logging To Traffit: {{ content['logging_to_traffit'] }}</li>
+            <li>Get Id Of All Active: {{ content['get_id_of_all_active_project'] }}</li>
+            <li>Kanbas Class Name: {{ content['kanbas_class_name'] }}</li>
+            <li>Candidate Card Class Name: {{ content['candidate_card_class_name'] }}</li>
+            <li>Candidate Name Class Name: {{ content['candidate_name_class_name'] }}</li>
+            <li>Candidate Days Class Name: {{ content['candidate_days_class_name'] }}</li>
+            <li>Entire Project: {{ content['etntire_class'] }}</li>
+        </ul>
+    </body>
+</html>

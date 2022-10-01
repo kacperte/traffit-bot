@@ -14,7 +14,7 @@ class MailAdapter:
         self.server.ehlo()
         self.server.login(self.username, self.password)
 
-    def send_mail(self, recipient_email: str, subject: str, content: str):
+    def send_mail(self, recipient_email: str, subject: str, content):
         message = self._compose_message(content, recipient_email, subject)
         self.server.sendmail(self.username, recipient_email, message.as_string())
 

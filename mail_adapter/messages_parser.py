@@ -13,3 +13,7 @@ class Message:
 
 class CandidateAlert(Message):
     TEMPLATE_FILE = "./templates/candidate_alert.html"
+
+
+class TestsAlert(Message):
+    TEMPLATE_FILE = "./templates/tests_alert.html"
