@@ -15,5 +15,9 @@ class CandidateAlert(Message):
     TEMPLATE_FILE = "./templates/candidate_alert.html"
 
 
+class CandidateAlertEmpty(Message):
+    TEMPLATE_FILE = "./templates/candidate_alert_empty.html"
+
+
 class TestsAlert(Message):
     TEMPLATE_FILE = "./templates/tests_alert.html"
