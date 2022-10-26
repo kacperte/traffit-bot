@@ -154,7 +154,7 @@ class TraffitBot:
         self.driver.refresh()
         while True:
             new_stages = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF ffYORD"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
             )[0]
             num_of_candidates_in_stages = new_stages.find_elements(
                 By.CLASS_NAME, "sc-jIAOiI"
@@ -168,7 +168,7 @@ class TraffitBot:
             if len(num_of_candidates_in_stages) != len(
                 WebDriverWait(self.driver, 10)
                 .until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrFK"))
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
                 )[0]
                 .find_elements(By.CLASS_NAME, "sc-jIAOiI")
             ):
@@ -183,7 +183,7 @@ class TraffitBot:
                 break
         while True:
             screen_stages = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrFK"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
             )[1]
             num_of_candidates_in_stages = screen_stages.find_elements(
                 By.CLASS_NAME, "sc-jIAOiI"
@@ -198,7 +198,7 @@ class TraffitBot:
             if len(num_of_candidates_in_stages) != len(
                 WebDriverWait(self.driver, 10)
                 .until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrFK"))
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
                 )[0]
                 .find_elements(By.CLASS_NAME, "sc-jIAOiI")
             ):
@@ -216,7 +216,7 @@ class TraffitBot:
         # Locate project stages kanbans
         try:
             stages = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrFK"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
             )
 
         except NoSuchElementException:
