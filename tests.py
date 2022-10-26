@@ -55,7 +55,7 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
             )
             if elements:
                 self.driver.delete_all_cookies()
@@ -93,7 +93,7 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-bgrGEg"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-zsjhC"))
             )
             if elements:
                 self.driver.delete_all_cookies()
@@ -112,7 +112,7 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-erPKsr"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-eoXOpV"))
             )
             if elements:
                 self.driver.delete_all_cookies()
