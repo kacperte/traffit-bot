@@ -237,15 +237,15 @@ class TraffitBot:
         }
 
         for candidate, days in zip(
-            new_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
-            new_stages.find_elements(By.CLASS_NAME, "sc-erPKsr"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-zsjhC"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-eoXOpV"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
 
         for candidate, days in zip(
-            screen_stages.find_elements(By.CLASS_NAME, "sc-bgrGEg"),
-            screen_stages.find_elements(By.CLASS_NAME, "sc-erPKsr"),
+            screen_stages.find_elements(By.CLASS_NAME, "c-zsjhC"),
+            screen_stages.find_elements(By.CLASS_NAME, "sc-eoXOpV"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
