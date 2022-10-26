@@ -16,21 +16,21 @@ class TestTraffitBot(TraffitBot):
         self.random_project_id = None
         print("__Start Testing__")
         self.tests_output = {
-            'logging_to_traffit': False,
-            'get_id_of_all_active_project': False,
-            'kanbas_class_name': False,
-            'candidate_card_class_name': False,
-            'candidate_name_class_name': False,
-            'candidate_days_class_name': False,
-            'etntire_class': False,
-                        }
+            "logging_to_traffit": False,
+            "get_id_of_all_active_project": False,
+            "kanbas_class_name": False,
+            "candidate_card_class_name": False,
+            "candidate_name_class_name": False,
+            "candidate_days_class_name": False,
+            "etntire_class": False,
+        }
 
     def test_logging_to_traffit(self):
         try:
             self.login_to_traffit()
             self.driver.delete_all_cookies()
             print("#Logging To Traffit__Success__")
-            self.tests_output['logging_to_traffit'] = True
+            self.tests_output["logging_to_traffit"] = True
         except Exception as e:
             print(f"{e} #Logging To Traffit__Error__")
 
@@ -41,7 +41,7 @@ class TestTraffitBot(TraffitBot):
             if type(output) == list and len(output) > 0:
                 self.driver.delete_all_cookies()
                 print("#Get Id Of All Active Project__Success__")
-                self.tests_output['get_id_of_all_active_project'] = True
+                self.tests_output["get_id_of_all_active_project"] = True
             else:
                 print("#Get Id Of All Active Project__Problem__")
         except Exception as e:
@@ -50,7 +50,9 @@ class TestTraffitBot(TraffitBot):
     def test_kanbans_class_name(self):
         try:
             self.login_to_traffit()
-            self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}")
+            self.driver.get(
+                f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
+            )
 
             elements = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jOhDuK"))
@@ -58,7 +60,7 @@ class TestTraffitBot(TraffitBot):
             if elements:
                 self.driver.delete_all_cookies()
                 print("#Kanbas Class Name__Success__")
-                self.tests_output['kanbas_class_name'] = True
+                self.tests_output["kanbas_class_name"] = True
             else:
                 print("#Kanbas Class Name__Problem__")
         except Exception as e:
@@ -67,7 +69,9 @@ class TestTraffitBot(TraffitBot):
     def test_candidate_card_class_name(self):
         try:
             self.login_to_traffit()
-            self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}")
+            self.driver.get(
+                f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
+            )
 
             elements = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jIAOiI"))
@@ -75,7 +79,7 @@ class TestTraffitBot(TraffitBot):
             if elements:
                 self.driver.delete_all_cookies()
                 print("#Candidate Card Class Name__Success__")
-                self.tests_output['candidate_card_class_name'] = True
+                self.tests_output["candidate_card_class_name"] = True
             else:
                 print("#Candidate Card Name__Problem__")
         except Exception as e:
@@ -84,7 +88,9 @@ class TestTraffitBot(TraffitBot):
     def test_candidate_name_class_name(self):
         try:
             self.login_to_traffit()
-            self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}")
+            self.driver.get(
+                f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
+            )
 
             elements = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-bgrGEg"))
@@ -92,7 +98,7 @@ class TestTraffitBot(TraffitBot):
             if elements:
                 self.driver.delete_all_cookies()
                 print("#Candidate Name Class Name__Success__")
-                self.tests_output['candidate_name_class_name'] = True
+                self.tests_output["candidate_name_class_name"] = True
             else:
                 print("#Candidate Name Name__Problem__")
         except Exception as e:
@@ -101,7 +107,9 @@ class TestTraffitBot(TraffitBot):
     def test_candidate_days_class_name(self):
         try:
             self.login_to_traffit()
-            self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}")
+            self.driver.get(
+                f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
+            )
 
             elements = WebDriverWait(self.driver, 10).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-erPKsr"))
@@ -109,7 +117,7 @@ class TestTraffitBot(TraffitBot):
             if elements:
                 self.driver.delete_all_cookies()
                 print("#Candidate Days Class Name__Success__")
-                self.tests_output['candidate_days_class_name'] = True
+                self.tests_output["candidate_days_class_name"] = True
             else:
                 print("#Candidate Days Name__Problem__")
         except Exception as e:
@@ -121,7 +129,7 @@ class TestTraffitBot(TraffitBot):
             if type(output) == list and len(output) > 0:
                 self.driver.delete_all_cookies()
                 print("#Entire Project__Success__")
-                self.tests_output['etntire_class'] = True
+                self.tests_output["etntire_class"] = True
             else:
                 print("#Candidate Days Name__Problem__")
         except Exception as e:
@@ -139,10 +147,9 @@ class TestTraffitBot(TraffitBot):
         return self.tests_output
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     output = TestTraffitBot(
-        login=os.environ.get("LOGIN"),
-        password=os.environ.get("PASSWORD")
+        login=os.environ.get("LOGIN"), password=os.environ.get("PASSWORD")
     ).main()
 
     msg = TestsAlert()
@@ -156,5 +163,7 @@ if __name__ == '__main__':
     mailer.send_mail(
         recipient_email="kacper.trzepiecinski@hsswork.pl",
         subject="Status testów",
-        content=msg.render(name="Kacper", content=output, date=datetime.datetime.now().date()),
+        content=msg.render(
+            name="Kacper", content=output, date=datetime.datetime.now().date()
+        ),
     )

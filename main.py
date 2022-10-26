@@ -7,8 +7,7 @@ import os
 
 if __name__ == "__main__":
     info = TraffitBot(
-        login=os.environ.get("LOGIN"),
-        password=os.environ.get("PASSWORD")
+        login=os.environ.get("LOGIN"), password=os.environ.get("PASSWORD")
     ).get_info_about_all_active_project()
 
     prepared_info = EmailPreparer(data=info).assign_candidates_to_recruiter()
@@ -27,13 +26,14 @@ if __name__ == "__main__":
         mailer.send_mail(
             recipient_email="kacper.trzepiecinski@hsswork.pl",
             subject="Status kandydatów",
-            content=msg.render(name="Kacper", content=k_trzepiecinski_info)
+            content=msg.render(name="Kacper", content=k_trzepiecinski_info),
         )
     else:
         mailer.send_mail(
             recipient_email="kacper.trzepiecinski@hsswork.pl",
             subject="Status kandydatów",
-            content=msg_empty.render(name="Kacper", content=k_trzepiecinski_info))
+            content=msg_empty.render(name="Kacper", content=k_trzepiecinski_info),
+        )
 
     # Borowska
     e_borowska_info = prepared_info.ewelina_borowska
@@ -54,10 +54,10 @@ if __name__ == "__main__":
     e_beta_info = prepared_info.ewelina_beta
     if len(e_beta_info) > 0:
         mailer.send_mail(
-                recipient_email="ewelina.beta@hsswork.pl",
-                subject="Status kandydatów",
-                content=msg.render(name="Ewelina", content=e_beta_info),
-            )
+            recipient_email="ewelina.beta@hsswork.pl",
+            subject="Status kandydatów",
+            content=msg.render(name="Ewelina", content=e_beta_info),
+        )
     else:
         mailer.send_mail(
             recipient_email="ewelina.beta@hsswork.pl",
@@ -79,4 +79,3 @@ if __name__ == "__main__":
             subject="Status kandydatów",
             content=msg_empty.render(name="Patrycja", content=p_rosik_info),
         )
-
