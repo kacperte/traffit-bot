@@ -46,8 +46,8 @@ class TraffitBot:
                     EC.presence_of_element_located(
                         (
                             By.XPATH,
-                            '//*[@id="recruitments_all"]/div[2]/div[1]/div[2]/div/div/div/div[2]/div[2]/table/tbody['
-                            "11]/tr/td/div[2]/div",
+                            '//*[@id="recruitments_all"]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div['
+                            '2]/table/tbody[11]/tr/td/div[2]/div',
                         )
                     )
                 )

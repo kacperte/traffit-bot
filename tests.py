@@ -36,10 +36,8 @@ class TestTraffitBot(TraffitBot):
 
     def test_get_id_of_all_actvie_project(self):
         try:
-            output = self.get_id_of_all_actvie_project()
-            print('1',output)
+            output = self.get_id_of_all_actvie_project()  # !
             self.random_project_id = output[0]
-            print('2',self.random_project_id)
             if type(output) == list and len(output) > 0:
                 self.driver.delete_all_cookies()
                 print("#Get Id Of All Active Project__Success__")
