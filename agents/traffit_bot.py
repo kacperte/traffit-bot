@@ -32,9 +32,14 @@ class TraffitBot:
         self.driver.find_element(By.ID, "username").send_keys(self.login)
         time.sleep(2)
         self.driver.find_element(By.ID, "password").send_keys(self.password)
-        self.driver.find_element(By.ID, "password").send_keys("\n")
+        self.driver.find_element(By.ID, "password")
+        time.sleep(2)
+        self.driver.find_element(
+            By.XPATH, "/html/body/div/div[2]/div/div[1]/div[1]/form/div[3]/button"
+        ).click()
         time.sleep(2)
         self.driver.get(self.ALL_PROJECT_URL)
+        time.sleep(2)
 
     def get_id_of_all_actvie_project(self):
         self.login_to_traffit()
