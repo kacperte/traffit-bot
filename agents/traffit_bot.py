@@ -63,7 +63,7 @@ class TraffitBot:
                     EC.element_to_be_clickable(
                         (
                             By.XPATH,
-                            f'//*[@id="recruitments_all"]/div[2]/div[1]/div[2]/div/div/div/div[2]/div[2]/table/tbody['
+                            f'//*[@id="recruitments_all"]/div[2]/div[1]/div[2]/div[2]/div/div/div[2]/div[2]/table/tbody['
                             f"11]/tr/td/div[2]/div/div[{i}]",
                         )
                     )
