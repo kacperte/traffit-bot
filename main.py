@@ -79,3 +79,18 @@ if __name__ == "__main__":
             subject="Status kandydatów",
             content=msg_empty.render(name="Patrycja", content=p_rosik_info),
         )
+
+    # Szyndlauer
+    m_szyndlauer_info = prepared_info.mateusz_szyndlauer
+    if len(m_szyndlauer_info) > 0:
+        mailer.send_mail(
+            recipient_email="mateusz.szyndlauer@hsswork.pl",
+            subject="Status kandydatów",
+            content=msg.render(name="Mateusz", content=m_szyndlauer_info),
+        )
+    else:
+        mailer.send_mail(
+            recipient_email="mateusz.szyndlauer@hsswork.pl",
+            subject="Status kandydatów",
+            content=msg_empty.render(name="Mateusz", content=m_szyndlauer_info),
+        )
