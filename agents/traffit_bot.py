@@ -240,15 +240,15 @@ class TraffitBot:
         }
 
         for candidate, days in zip(
-            new_stages.find_elements(By.CLASS_NAME, "sc-zsjhC"),
-            new_stages.find_elements(By.CLASS_NAME, "sc-eoXOpV"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-gmSHEY"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
 
         for candidate, days in zip(
-            screen_stages.find_elements(By.CLASS_NAME, "c-zsjhC"),
-            screen_stages.find_elements(By.CLASS_NAME, "sc-eoXOpV"),
+            screen_stages.find_elements(By.CLASS_NAME, "sc-gmSHEY"),
+            screen_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
