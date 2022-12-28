@@ -243,7 +243,7 @@ class TraffitBot:
             new_stages.find_elements(By.CLASS_NAME, "sc-gmSHEY"),
             new_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
         ):
-            print('DAYS:', days, 'CANDIDATE', candidate)
+            print('DAYS:', days.text, 'CANDIDATE', candidate.text)
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
 
@@ -251,7 +251,7 @@ class TraffitBot:
             screen_stages.find_elements(By.CLASS_NAME, "sc-gmSHEY"),
             screen_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
         ):
-            print('DAYS:', days, 'CANDIDATE', candidate)
+            print('DAYS:', days.text, 'CANDIDATE', candidate.text)
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
         return output
