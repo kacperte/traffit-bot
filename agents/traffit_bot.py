@@ -103,7 +103,7 @@ class TraffitBot:
         # Locate project owner info
         try:
             owner = (
-                WebDriverWait(self.driver, 10)
+                WebDriverWait(self.driver, 30)
                 .until(
                     EC.presence_of_element_located(
                         (
