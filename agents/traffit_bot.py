@@ -46,7 +46,7 @@ class TraffitBot:
         projects_id = []
         try:
             pages_nav = (
-                WebDriverWait(self.driver, 10)
+                WebDriverWait(self.driver, 30)
                 .until(
                     EC.presence_of_element_located(
                         (
@@ -63,7 +63,7 @@ class TraffitBot:
         for i in pages_nav:
             self.driver.execute_script(
                 "arguments[0].click();",
-                WebDriverWait(self.driver, 10).until(
+                WebDriverWait(self.driver, 30).until(
                     EC.element_to_be_clickable(
                         (
                             By.XPATH,
@@ -88,7 +88,7 @@ class TraffitBot:
         self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{id}")
         # Locate details page button and click it
         try:
-            details = WebDriverWait(self.driver, 10).until(
+            details = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_element_located(
                     (By.XPATH, "//*[contains(text(), 'Szczegóły')]")
                 )
