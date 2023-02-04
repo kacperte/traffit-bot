@@ -123,7 +123,7 @@ class TraffitBot:
         # Locate project info (project name and client)
         try:
             project_info = (
-                WebDriverWait(self.driver, 10)
+                WebDriverWait(self.driver, 30)
                 .until(
                     EC.presence_of_element_located(
                         (By.XPATH, "//div[@class='traffit-h1']")
@@ -142,7 +142,7 @@ class TraffitBot:
 
         # Locate pipeline page button and click it
         try:
-            pipeline = WebDriverWait(self.driver, 10).until(
+            pipeline = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_element_located(
                     (By.XPATH, "//*[contains(text(), 'Pipeline')]")
                 )
@@ -156,7 +156,7 @@ class TraffitBot:
             raise "Loading pipeline page button took too much time!"
         self.driver.refresh()
         while True:
-            new_stages = WebDriverWait(self.driver, 10).until(
+            new_stages = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
             )[0]
             num_of_candidates_in_stages = new_stages.find_elements(
@@ -169,7 +169,7 @@ class TraffitBot:
             )
             time.sleep(5)
             if len(num_of_candidates_in_stages) != len(
-                WebDriverWait(self.driver, 10)
+                WebDriverWait(self.driver, 30)
                 .until(
                     EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
                 )[0]
@@ -185,7 +185,7 @@ class TraffitBot:
             else:
                 break
         while True:
-            screen_stages = WebDriverWait(self.driver, 10).until(
+            screen_stages = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
             )[1]
             num_of_candidates_in_stages = screen_stages.find_elements(
@@ -199,7 +199,7 @@ class TraffitBot:
             time.sleep(5)
 
             if len(num_of_candidates_in_stages) != len(
-                WebDriverWait(self.driver, 10)
+                WebDriverWait(self.driver, 30)
                 .until(
                     EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
                 )[0]
@@ -218,7 +218,7 @@ class TraffitBot:
 
         # Locate project stages kanbans
         try:
-            stages = WebDriverWait(self.driver, 10).until(
+            stages = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
             )
 
@@ -240,18 +240,16 @@ class TraffitBot:
         }
 
         for candidate, days in zip(
-            new_stages.find_elements(By.CLASS_NAME, "sc-gmSHEY"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-dwLEzm"),
             new_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
         ):
-            print('DAYS:', days.text, 'CANDIDATE', candidate.text)
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
 
         for candidate, days in zip(
-            screen_stages.find_elements(By.CLASS_NAME, "sc-gmSHEY"),
+            screen_stages.find_elements(By.CLASS_NAME, "sc-dwLEzm"),
             screen_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
         ):
-            print('DAYS:', days.text, 'CANDIDATE', candidate.text)
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
         return output
