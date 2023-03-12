@@ -87,14 +87,12 @@ class TraffitBot:
         # Open recruitment project
         self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{id}")
         # Locate details page button and click it
-        print("1")
         try:
             details = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_element_located(
                     (By.XPATH, "//*[contains(text(), 'Szczegóły')]")
                 )
             )
-            print(details)
             self.driver.execute_script("arguments[0].click();", details)
 
         except NoSuchElementException:
@@ -102,7 +100,6 @@ class TraffitBot:
 
         except TimeoutException:
             raise "Loading details page element took too much time!"
-        print(self.driver.page_source)
         # Locate project owner info
         try:
             owner = (
@@ -243,15 +240,15 @@ class TraffitBot:
         }
 
         for candidate, days in zip(
-            new_stages.find_elements(By.CLASS_NAME, "sc-dwLEzm"),
             new_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
+            new_stages.find_elements(By.CLASS_NAME, "sc-goMRkL"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
 
         for candidate, days in zip(
-            screen_stages.find_elements(By.CLASS_NAME, "sc-dwLEzm"),
             screen_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
+            screen_stages.find_elements(By.CLASS_NAME, "sc-goMRkL"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
