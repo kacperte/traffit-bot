@@ -87,12 +87,14 @@ class TraffitBot:
         # Open recruitment project
         self.driver.get(f"https://hsswork.traffit.com/#/recruitments/recruitment/{id}")
         # Locate details page button and click it
+        print("1")
         try:
             details = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_element_located(
                     (By.XPATH, "//*[contains(text(), 'Szczegóły')]")
                 )
             )
+            print(details)
             self.driver.execute_script("arguments[0].click();", details)
 
         except NoSuchElementException:
@@ -100,6 +102,7 @@ class TraffitBot:
 
         except TimeoutException:
             raise "Loading details page element took too much time!"
+        print("2")
         # Locate project owner info
         try:
             owner = (
