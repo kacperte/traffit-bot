@@ -108,7 +108,7 @@ class TraffitBot:
                     EC.presence_of_element_located(
                         (
                             By.XPATH,
-                            "//div[@class='recruitment-owner-item ng-binding ng-scope']",
+                            "//div[@class='recruitment-owner-item']",
                         )
                     )
                 )
