@@ -102,7 +102,7 @@ class TraffitBot:
 
         except TimeoutException:
             raise "Loading details page element took too much time!"
-        print("2")
+        print(self.driver.page_source)
         # Locate project owner info
         try:
             owner = (
