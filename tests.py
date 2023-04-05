@@ -73,8 +73,8 @@ class TestTraffitBot(TraffitBot):
                 f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
             )
 
-            elements = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-dwLEzm"))
+            elements = WebDriverWait(self.driver, 30).until(
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-gmSHEY "))
             )
             if elements:
                 self.driver.delete_all_cookies()
