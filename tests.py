@@ -74,7 +74,7 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jIAOiI"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-dwLEzm"))
             )
             if elements:
                 self.driver.delete_all_cookies()
