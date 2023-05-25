@@ -69,12 +69,13 @@ class TestTraffitBot(TraffitBot):
     def test_candidate_card_class_name(self):
         try:
             self.login_to_traffit()
+            print(self.random_project_id)
             self.driver.get(
                 f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
             )
 
             elements = WebDriverWait(self.driver, 30).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF hbPnyL"))
             )
             if elements:
                 self.driver.delete_all_cookies()
@@ -93,7 +94,7 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jdzWJC"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jdzWJC idXItW"))
             )
             if elements:
                 self.driver.delete_all_cookies()
@@ -112,7 +113,7 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-fCdBJp"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-fCdBJp coqbrR"))
             )
             if elements:
                 self.driver.delete_all_cookies()
