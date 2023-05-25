@@ -13,7 +13,7 @@ class TestTraffitBot(TraffitBot):
         super(TestTraffitBot, self).__init__(login, password)
         self.login = login
         self.password = password
-        self.random_project_id = None
+        self.random_project_id = 373
         print("__Start Testing__")
         self.tests_output = {
             "logging_to_traffit": False,
@@ -37,7 +37,6 @@ class TestTraffitBot(TraffitBot):
     def test_get_id_of_all_actvie_project(self):
         try:
             output = self.get_id_of_all_actvie_project()  # !
-            self.random_project_id = output[0]
             if type(output) == list and len(output) > 0:
                 self.driver.delete_all_cookies()
                 print("#Get Id Of All Active Project__Success__")
@@ -69,7 +68,6 @@ class TestTraffitBot(TraffitBot):
     def test_candidate_card_class_name(self):
         try:
             self.login_to_traffit()
-            print(self.random_project_id)
             self.driver.get(
                 f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
             )
