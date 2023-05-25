@@ -59,7 +59,7 @@ class TestTraffitBot(TraffitBot):
             )
             if elements:
                 self.driver.delete_all_cookies()
-                print("#Kanbas Class Name__Success__")
+                print("#Kanbas class Name__Success__")
                 self.tests_output["kanbas_class_name"] = True
             else:
                 print("#Kanbas Class Name__Problem__")
