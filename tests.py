@@ -87,6 +87,7 @@ class TestTraffitBot(TraffitBot):
     def test_candidate_name_class_name(self):
         try:
             self.login_to_traffit()
+            print(self.driver.page_source)
             self.driver.get(
                 f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
             )
