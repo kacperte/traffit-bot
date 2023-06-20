@@ -53,8 +53,8 @@ class TestTraffitBot(TraffitBot):
                 f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
             )
 
-            elements = WebDriverWait(self.driver, 10).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-hlnMnd"))
+            elements = WebDriverWait(self.driver, 20).until(
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jIAOiI"))
             )
             if elements:
                 self.driver.delete_all_cookies()
@@ -73,7 +73,7 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 30).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF hbPnyL"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-fEVxLL"))
             )
             if elements:
                 self.driver.delete_all_cookies()
@@ -92,7 +92,7 @@ class TestTraffitBot(TraffitBot):
                 f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
             )
 
-            elements = WebDriverWait(self.driver, 10).until(
+            elements = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jdzWJC idXItW"))
             )
             if elements:
@@ -111,7 +111,7 @@ class TestTraffitBot(TraffitBot):
                 f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
             )
 
-            elements = WebDriverWait(self.driver, 10).until(
+            elements = WebDriverWait(self.driver, 30).until(
                 EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-fCdBJp coqbrR"))
             )
             if elements:
