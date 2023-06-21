@@ -157,10 +157,10 @@ class TraffitBot:
         self.driver.refresh()
         while True:
             new_stages = WebDriverWait(self.driver, 30).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jIAOiI"))
             )[0]
             num_of_candidates_in_stages = new_stages.find_elements(
-                By.CLASS_NAME, "sc-jIAOiI"
+                By.CLASS_NAME, "sc-fEVxLL"
             )
             if len(num_of_candidates_in_stages) <= 2:
                 break
@@ -171,12 +171,12 @@ class TraffitBot:
             if len(num_of_candidates_in_stages) != len(
                 WebDriverWait(self.driver, 30)
                 .until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jIAOiI"))
                 )[0]
-                .find_elements(By.CLASS_NAME, "sc-jIAOiI")
+                .find_elements(By.CLASS_NAME, "sc-fEVxLL")
             ):
                 num_of_candidates_in_stages = new_stages.find_elements(
-                    By.CLASS_NAME, "sc-jIAOiI"
+                    By.CLASS_NAME, "sc-fEVxLL"
                 )
                 self.driver.execute_script(
                     "arguments[0].scrollIntoView();", num_of_candidates_in_stages[-1]
@@ -186,10 +186,10 @@ class TraffitBot:
                 break
         while True:
             screen_stages = WebDriverWait(self.driver, 30).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jIAOiI"))
             )[1]
             num_of_candidates_in_stages = screen_stages.find_elements(
-                By.CLASS_NAME, "sc-jIAOiI"
+                By.CLASS_NAME, "sc-fEVxLL"
             )
             if len(num_of_candidates_in_stages) <= 2:
                 break
@@ -201,12 +201,12 @@ class TraffitBot:
             if len(num_of_candidates_in_stages) != len(
                 WebDriverWait(self.driver, 30)
                 .until(
-                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
+                    EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jIAOiI"))
                 )[0]
-                .find_elements(By.CLASS_NAME, "sc-jIAOiI")
+                .find_elements(By.CLASS_NAME, "sc-fEVxLL")
             ):
                 num_of_candidates_in_stages = screen_stages.find_elements(
-                    By.CLASS_NAME, "sc-jIAOiI"
+                    By.CLASS_NAME, "sc-fEVxLL"
                 )
                 self.driver.execute_script(
                     "arguments[0].scrollIntoView();", num_of_candidates_in_stages[-1]
@@ -219,7 +219,7 @@ class TraffitBot:
         # Locate project stages kanbans
         try:
             stages = WebDriverWait(self.driver, 30).until(
-                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-TRNrF"))
+                EC.presence_of_all_elements_located((By.CLASS_NAME, "sc-jIAOiI"))
             )
 
         except NoSuchElementException:
@@ -240,15 +240,15 @@ class TraffitBot:
         }
 
         for candidate, days in zip(
-            new_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
-            new_stages.find_elements(By.CLASS_NAME, "sc-goMRkL"),
+            new_stages.find_elements(By.XPATH, "//span[@class='sc-jdzWJC idXItW']"),
+            new_stages.find_elements(By.XPATH, "//div[@title='Czas w rekrutacji']"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
 
         for candidate, days in zip(
-            screen_stages.find_elements(By.CLASS_NAME, "sc-VcoSR"),
-            screen_stages.find_elements(By.CLASS_NAME, "sc-goMRkL"),
+            screen_stages.find_elements(By.XPATH, "//span[@class='sc-jdzWJC idXItW']"),
+            screen_stages.find_elements(By.XPATH, "//div[@title='Czas w rekrutacji']"),
         ):
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
