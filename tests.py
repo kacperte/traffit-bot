@@ -87,7 +87,6 @@ class TestTraffitBot(TraffitBot):
     def test_candidate_name_class_name(self):
         try:
             self.login_to_traffit()
-            print(self.driver.page_source)
             self.driver.get(
                 f"https://hsswork.traffit.com/#/recruitments/recruitment/{self.random_project_id}"
             )
@@ -126,6 +125,7 @@ class TestTraffitBot(TraffitBot):
     def test_entire_class(self):
         try:
             output = self.get_info_about_all_active_project()
+            print(output)
             if type(output) == list and len(output) > 0:
                 self.driver.delete_all_cookies()
                 print("#Entire Project__Success__")
