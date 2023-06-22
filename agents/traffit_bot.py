@@ -268,9 +268,14 @@ class TraffitBot:
 
     @staticmethod
     def does_it_need_feedback(days):
+        # Check if the string 'days' contains the "<" character after being split into a list of words
+        if "<" in days.split():
+            return False
+        # Check if the string 'days' consists of a single word, specifically "Dzisiaj" (Today in Polish)
         if len(days.split()) == 1:
             return False
+        # Check if the first word of the 'days' string, when converted to an integer, is greater than or equal to 5
         if int(days.split()[0]) >= 5:
             return True
-        else:
+        else:  # If none of the conditions are met, return False
             return False
