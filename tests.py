@@ -92,8 +92,10 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 30).until(
-                EC.presence_of_all_elements_located((By.XPATH, "//span[@class='sc-jdzWJC idXItW']")
-                                                    ))
+                EC.presence_of_all_elements_located(
+                    (By.XPATH, "//span[@class='sc-jdzWJC idXItW']")
+                )
+            )
             if elements:
                 self.driver.delete_all_cookies()
                 print("#Candidate Name Class Name__Success__")
@@ -111,7 +113,9 @@ class TestTraffitBot(TraffitBot):
             )
 
             elements = WebDriverWait(self.driver, 30).until(
-                EC.presence_of_all_elements_located((By.XPATH, "//div[@title='Czas w rekrutacji']"))
+                EC.presence_of_all_elements_located(
+                    (By.XPATH, "//div[@title='Czas w rekrutacji']")
+                )
             )
             if elements:
                 self.driver.delete_all_cookies()

@@ -1,7 +1,8 @@
 from collections import namedtuple
 
 Recruiter = namedtuple(
-    "Recruiter", "ewelina_borowska ewelina_beta patrycja_rosik kacper_trzepiecinski mateusz_szyndlauer"
+    "Recruiter",
+    "ewelina_borowska ewelina_beta patrycja_rosik kacper_trzepiecinski mateusz_szyndlauer",
 )
 
 

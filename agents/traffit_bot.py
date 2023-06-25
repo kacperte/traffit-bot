@@ -243,7 +243,7 @@ class TraffitBot:
             new_stages.find_elements(By.XPATH, "//span[@class='sc-jdzWJC idXItW']"),
             new_stages.find_elements(By.XPATH, "//div[@title='Czas w rekrutacji']"),
         ):
-            print(days.text)
+
             if self.does_it_need_feedback(days.text):
                 output["Candidate"].update({candidate.text: days.text})
 
