@@ -64,10 +64,16 @@ def get_id_of_all_candidates(
 
 
 def get_stages_history(candidate_id):
-    output = {key: [] for key in candidate_id}
+    data = {key: [] for key in candidate_id}
     for id in candidate_id:
         driver_chrome.get(candidate_url + id)
         driver_chrome.refresh()
+
+        candidate_name = WebDriverWait(driver_chrome, 10).until(
+                    EC.visibility_of_element_located(
+                        (By.XPATH, '//div[@class="info__primary-info"]')
+                    )
+                )
 
         while True:
             try:
@@ -77,46 +83,42 @@ def get_stages_history(candidate_id):
                     )
                 )
                 button.click()
-                time.sleep(2)
+                # time.sleep(2)
             except:
                 break
 
-        time.sleep(2)
+        # time.sleep(2)
 
         containers = driver_chrome.find_elements(
             By.XPATH, "//div[@class='sc-czShuu eDgyIB']"
         )
+
         stages_containters = [
             con
             for con in containers
-            if con.find_element(By.XPATH, "//div[@class='sc-jwBhTO bUsgEG']")
+            if con.find_elements(By.XPATH, ".//div[@class='sc-jwBhTO bUsgEG']")
         ]
+
         stages_label = [
-            el.find_element(By.XPATH, "//div[@class='sc-jwBhTO bUsgEG']").text
+            element.text
             for el in stages_containters
+            for element in el.find_elements(By.XPATH, ".//div[@class='sc-jwBhTO bUsgEG']")
         ]
+
         stages_project_name = [
-            el.find_element(By.XPATH, "//div[@class='sc-jNXgPE iEtfWf']").text
+            element.text
             for el in stages_containters
+            for element in el.find_elements(By.XPATH, ".//div[@class='sc-jNXgPE iEtfWf']")
         ]
-        print(stages_project_name)
-        # for label, projet_name in zip(stages_label, stages_project_name):
-        #     print(label.split("→")[0].replace("\n", ''), label.split("→")[1].replace("\n", ''), projet_name.replace("\n", ''), "\n----")
+
+        for label, projet_name in zip(stages_label, stages_project_name):
+            print(label.split("→")[0].replace("\n", ''), label.split("→")[1].replace("\n", ''), projet_name.split("\n"), "\n----")
+        out
         break
 
-        # timeline = WebDriverWait(driver_chrome, 10).until(
-        #         EC.visibility_of_element_located((By.XPATH, "//div[@class='sc-liaBrn gTpfqt']"))
-        #     )
-        #
-        # stages = [el.text for el in timeline.find_elements(By.XPATH, "//div[@class='sc-jwBhTO bUsgEG']")]
-        #
-        # to_add = [(el.split("→")[0].replace("\n", ''), el.split("→")[1].replace("\n", '')) for el in
-        #           stages]
-        #
-        # output[id] = to_add
+    return data
 
-    return output
-
+# candidate name : {from: value, to: value, date: value, client: value, position: value}
 
 ids = get_id_of_all_candidates()
 print(get_stages_history(ids))
