@@ -4,6 +4,7 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from datetime import datetime
 
 driver_chrome = webdriver.Chrome(ChromeDriverManager().install())
 login = "kacper.trzepiecinski@hsswork.pl"
@@ -63,6 +64,30 @@ def get_id_of_all_candidates(
     return candidates_id
 
 
+def format_date(date_string):
+    polish_to_english_months = {
+        'stycznia': 'January',
+        'lutego': 'February',
+        'marca': 'March',
+        'kwietnia': 'April',
+        'maja': 'May',
+        'czerwca': 'June',
+        'lipca': 'July',
+        'sierpnia': 'August',
+        'września': 'September',
+        'października': 'October',
+        'listopada': 'November',
+        'grudnia': 'December',
+    }
+
+    for polish, english in polish_to_english_months.items():
+        date_string = date_string.replace(polish, english)
+
+    date = datetime.strptime(date_string, '%A, %d %B %Y')
+
+    return date.strftime('%d/%m/%Y')
+
+
 def get_stages_history(candidate_id):
     data = {key: [] for key in candidate_id}
     for id in candidate_id:
@@ -103,7 +128,7 @@ def get_stages_history(candidate_id):
 
                 result = {
                     'candidate_name': candidate_name,
-                    'date': current_date,
+                    'date': format_date(current_date),
                     'from': stage_labels[0].replace("\n", ""),
                     'to': stage_labels[1].replace("\n", ""),
                     'project_name': project_info[0].replace("(", "").replace(")", ""),
